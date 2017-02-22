@@ -64,6 +64,22 @@ namespace RestaurantApp
           Assert.Equal(testRestaurantList, resultRestaurantList);
       }
 
+// this will test the GetId method
+        [Fact]
+        public void GetId_TestIfGetId_id()
+        {
+        //Arrange
+        Restaurant restaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
+        restaurant1.Save();
+
+        //Act
+        Restaurant savedRestaurant = Restaurant.GetAll()[0];
+        int result = savedRestaurant.GetId();
+        int testId = restaurant1.GetId();
+
+        //Assert
+          Assert.Equal(testId, result);
+        }
 
 // this will allow multiple tests to run at once
         public void Dispose()
