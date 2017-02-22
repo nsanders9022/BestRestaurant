@@ -101,6 +101,25 @@ namespace RestaurantApp
             Assert.Equal(testRestaurantList, resultRestaurantList);
         }
 
+// update cuisine
+        [Fact]
+        public void Test_Update_UpdateCuisineInData()
+        {
+            // Arrange
+            string oldCuisine = "Mexican";
+            Cuisine testCuisine = new Cuisine(oldCuisine);
+            testCuisine.Save();
+            string newCuisine = "Italian";
+
+            // Act
+            testCuisine.Update(newCuisine);
+
+            string result = testCuisine.GetType();
+
+            // Assert
+            Assert.Equal(newCuisine, result);
+        }
+
         // this will allow multiple tests to run at once
         public void Dispose()
         {

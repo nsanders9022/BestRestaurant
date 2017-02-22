@@ -189,6 +189,41 @@ namespace RestaurantApp
             return restaurants;
         }
 
+        //Update category name method
+        public void Update(string newType)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE cuisine SET type = @NewType OUTPUT INSERTED.type WHERE id = @CuisineId;", conn);
+
+            SqlParameter newTypeParameter = new SqlParameter();
+            newTypeParameter.ParameterName = "@newType";
+            newTypeParameter.Value = newType;
+            cmd.Parameters.Add(newTypeParameter);
+
+            SqlParameter cuisineIdParameter = new SqlParameter();
+            cuisineIdParameter.ParameterName = "@CuisineId";
+            cuisineIdParameter.Value = this.GetId();
+            cmd.Parameters.Add(cuisineIdParameter);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                this._type = rdr.GetString(0);
+            }
+
+            if (rdr !=null)
+            {
+                rdr.Close();
+            }
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
         // method to run multiple tests at once
         public static void DeleteAll()
         {

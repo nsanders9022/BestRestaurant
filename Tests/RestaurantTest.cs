@@ -36,17 +36,7 @@ namespace RestaurantApp
 
             List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1, restaurant2};
             List<Restaurant> resultRestaurantList = Restaurant.GetAll();
-            // this will list out each restaurant in each list to make sure its there
-            // foreach (Restaurant restaurant in testRestaurantList)
-            // {
-            //     Console.WriteLine("test " + restaurant.GetName());
-            //
-            // }
-            // foreach (Restaurant restaurant in resultRestaurantList)
-            // {
-            //     Console.WriteLine("result " + restaurant.GetName());
-            //
-            // }
+
             Assert.Equal(testRestaurantList, resultRestaurantList);
         }
         // this will test the save method
