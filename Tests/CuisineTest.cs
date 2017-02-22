@@ -120,6 +120,39 @@ namespace RestaurantApp
             Assert.Equal(newCuisine, result);
         }
 
+
+        //test that category was deleted from the database
+        [Fact]
+        public void Delete_DeleteFromDatabase_null()
+        {
+            //Arrange
+            string type1 = "German";
+            Cuisine testCuisine1 = new Cuisine(type1);
+            testCuisine1.Save();
+
+            string type2 = "French";
+            Cuisine testCuisine2 = new Cuisine(type2);
+            testCuisine2.Save();
+
+            Restaurant testRestaurant1 = new Restaurant("sudocipe", "seattle", false, testCuisine1.GetId());
+            Restaurant testRestaurant2 = new Restaurant("Dough", "seattle", true, testCuisine2.GetId());
+            testRestaurant1.Save();
+            testRestaurant2.Save();
+
+            //Act
+            testCuisine1.Delete();
+            List<Cuisine> resultCuisine = Cuisine.GetAll();
+            List<Cuisine> testCuisineList = new List<Cuisine> {testCuisine2};
+
+            List<Restaurant> resultRestaurant = Restaurant.GetAll();
+            List<Restaurant> testRestaurantList = new List<Restaurant> {testRestaurant2};
+
+            //Assert
+            Assert.Equal(testCuisineList, resultCuisine);
+            Assert.Equal(testRestaurantList, resultRestaurant);
+
+        }
+
         // this will allow multiple tests to run at once
         public void Dispose()
         {
