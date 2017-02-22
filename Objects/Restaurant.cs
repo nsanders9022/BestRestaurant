@@ -40,6 +40,10 @@ namespace RestaurantApp
                 return (idEquality && nameEquality && locationEquality && deliveryEquality && cuisineIdEquality);
             }
         }
+        public override int GetHashCode()
+        {
+             return this.GetName().GetHashCode();
+        }
 // get id
         public int GetId()
         {
@@ -70,6 +74,15 @@ namespace RestaurantApp
         {
             return _cuisineId;
         }
+        public int TranslateDelivery()
+        {
+            if (this._delivery == true)
+            {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
 
 // get all method for Restaurant list
 
@@ -89,7 +102,7 @@ namespace RestaurantApp
                 string restaurantName = rdr.GetString(1);
                 string restaurantLocation = rdr.GetString(2);
                 bool restaurantDelivery;
-                if (rdr.GetInt32(3) == 1)
+                if (rdr.GetByte(3) == 1)
                 {
                     restaurantDelivery = true;
                 }
@@ -98,7 +111,8 @@ namespace RestaurantApp
                     restaurantDelivery = false;
                 }
                 int restaurantCusineId = rdr.GetInt32(4);
-                Restaurant newRestaurant = new Restaurant(restaurantName, restaurantLocation, restaurantDelivery, restaurantCusineId);
+                Restaurant newRestaurant = new Restaurant(restaurantName, restaurantLocation, restaurantDelivery, restaurantCusineId, restaurantId);
+                AllRestaurants.Add(newRestaurant);
             }
             if (rdr != null)
             {
@@ -116,13 +130,13 @@ namespace RestaurantApp
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO restaurant (name, location, delivery, cuisine_id) OUTPUT INSERTED.id VALUES (@RestaurantName, @RestaurantLocation, @restaurantDelivery, @RestaurantCuisineId);", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO restaurant (name, location, delivery, cuisine_id) OUTPUT INSERTED.id VALUES (@RestaurantName, @RestaurantLocation, @RestaurantDelivery, @RestaurantCuisineId);", conn);
 
             SqlParameter nameParameter = new SqlParameter("@RestaurantName", this.GetName());
 
             SqlParameter locationParameter = new SqlParameter("@RestaurantLocation", this.GetLocation());
 
-            SqlParameter deliveryParameter = new SqlParameter("@RestaurantDelivery", this.GetDelivery());
+            SqlParameter deliveryParameter = new SqlParameter("@RestaurantDelivery", this.TranslateDelivery());
 
             SqlParameter cuisineIdParameter = new SqlParameter("@RestaurantCuisineId", this.GetCuisineId());
 
@@ -146,7 +160,7 @@ namespace RestaurantApp
                conn.Close();
            }
         }
-
+// method to run multiple tests at once
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();

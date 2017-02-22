@@ -12,7 +12,7 @@ namespace RestaurantApp
         {
             DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=restaurant_test;Integrated Security=SSPI;";
         }
-
+// this will test that no doubles are created
         [Fact]
         public void Equals_TestIfEqual_true()
         {
@@ -24,9 +24,34 @@ namespace RestaurantApp
                 //Assert
                 Assert.Equal(restaurant1, restaurant2);
             }
-
         }
+// this will test the get all method
+        [Fact]
+        public void GetAll_ReturnAllRestuarants_list()
+        {
+            Restaurant restaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
+            Restaurant restaurant2 = new Restaurant("Dough", "seattle", true, 2);
+            restaurant1.Save();
+            restaurant2.Save();
 
+            List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1, restaurant2};
+            List<Restaurant> resultRestaurantList = Restaurant.GetAll();
+
+            foreach (Restaurant restaurant in testRestaurantList)
+            {
+                Console.WriteLine("test " + restaurant.GetName());
+
+            }
+            foreach (Restaurant restaurant in resultRestaurantList)
+            {
+                Console.WriteLine("result " + restaurant.GetName());
+
+            }
+            Assert.Equal(testRestaurantList, resultRestaurantList);
+        }
+// this will test the save method
+
+// this will allow multiple tests to run at once
         public void Dispose()
         {
             Restaurant.DeleteAll();
