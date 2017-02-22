@@ -26,6 +26,20 @@ namespace RestaurantApp
                 Assert.Equal(cuisine1, cuisine2);
             }
         }
+
+        [Fact]
+        public void GetAll_ReturnAllCuisines_list()
+        {
+            Cuisine cuisine1 = new Cuisine("fusion");
+            Cuisine cuisine2 = new Cuisine("american");
+            cuisine1.Save();
+            cuisine2.Save();
+
+            List<Cuisine> testCuisineList = new List<Cuisine> {cuisine1, cuisine2};
+            List<Cuisine> resultCuisineList = Cuisine.GetAll();
+            Assert.Equal(testCuisineList, resultCuisineList);
+        }
+
         // this will allow multiple tests to run at once
         public void Dispose()
         {

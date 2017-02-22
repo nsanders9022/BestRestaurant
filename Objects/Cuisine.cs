@@ -86,7 +86,7 @@ namespace RestaurantApp
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO restaurant (type) OUTPUT INSERTED.id VALUES (@CuisineType);", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO cuisine (type) OUTPUT INSERTED.id VALUES (@CuisineType);", conn);
 
             SqlParameter typeParameter = new SqlParameter("@CuisineType", this.GetType());
 
