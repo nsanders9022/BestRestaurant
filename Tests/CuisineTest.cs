@@ -82,6 +82,25 @@ namespace RestaurantApp
            Cuisine foundCuisine = Cuisine.Find(testCuisine.GetId());
            Assert.Equal(testCuisine, foundCuisine);
         }
+
+        //get all restuarants that belong to a selected cuisine
+        [Fact]
+        public void GetRestaurantes_RetrievesAllRestaurantsWithinCuisine_list()
+        {
+            Cuisine testCuisine = new Cuisine("greasy food");
+            testCuisine.Save();
+
+            Restaurant restaurant1 = new Restaurant("sudocipe", "seattle", false, testCuisine.GetId());
+            Restaurant restaurant2 = new Restaurant("Dough", "seattle", true, testCuisine.GetId());
+            restaurant1.Save();
+            restaurant2.Save();
+
+            List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1, restaurant2};
+            List<Restaurant> resultRestaurantList = testCuisine.GetRestaurants();
+
+            Assert.Equal(testRestaurantList, resultRestaurantList);
+        }
+
         // this will allow multiple tests to run at once
         public void Dispose()
         {

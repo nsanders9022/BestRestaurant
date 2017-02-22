@@ -144,6 +144,51 @@ namespace RestaurantApp
             return foundCuisine;
         }
 
+        // get all restaurants from a category
+
+        public List<Restaurant> GetRestaurants()
+        {
+            List<Restaurant> restaurants = new List<Restaurant>{};
+
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant WHERE cuisine_id = @TypeId;", conn);
+            SqlParameter typeIdParameter = new SqlParameter();
+            typeIdParameter.ParameterName = "@TypeId";
+            typeIdParameter.Value = this.GetId();
+            cmd.Parameters.Add(typeIdParameter);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                int restaurantId = rdr.GetInt32(0);
+                string restaurantName = rdr.GetString(1);
+                string restaurantLocation = rdr.GetString(2);
+                bool restaurantDelivery;
+                if (rdr.GetByte(3) == 1)
+                {
+                    restaurantDelivery = true;
+                }
+                else
+                {
+                    restaurantDelivery = false;
+                }
+                int restaurantCusineId = rdr.GetInt32(4);
+                Restaurant newRestaurant = new Restaurant(restaurantName, restaurantLocation, restaurantDelivery, restaurantCusineId, restaurantId);
+                restaurants.Add(newRestaurant);
+            }
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return restaurants;
+        }
+
         // method to run multiple tests at once
         public static void DeleteAll()
         {
