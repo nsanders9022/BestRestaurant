@@ -40,9 +40,25 @@ namespace RestaurantApp
             Assert.Equal(testCuisineList, resultCuisineList);
         }
 
+        // this will test the save method
+        [Fact]
+        public void Save_TestIfSaved_True()
+        {
+            //Arrange
+            Cuisine cuisine1 = new Cuisine("american fusion");
+            cuisine1.Save();
+
+            List<Cuisine> testCuisineList = new List<Cuisine> {cuisine1};
+            List<Cuisine> resultCuisineList = Cuisine.GetAll();
+
+            //Assert
+            Assert.Equal(testCuisineList, resultCuisineList);
+        }
+
         // this will allow multiple tests to run at once
         public void Dispose()
         {
+            Cuisine.DeleteAll();
             Restaurant.DeleteAll();
         }
     }
