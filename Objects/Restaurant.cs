@@ -88,16 +88,17 @@ namespace RestaurantApp
                 int restaurantId = rdr.GetInt32(0);
                 string restaurantName = rdr.GetString(1);
                 string restaurantLocation = rdr.GetString(2);
+                bool restaurantDelivery;
                 if (rdr.GetInt32(3) == 1)
                 {
-                    bool restaurantDelivery = true;
+                    restaurantDelivery = true;
                 }
                 else
                 {
-                    bool restaurantDelivery = false;
+                    restaurantDelivery = false;
                 }
                 int restaurantCusineId = rdr.GetInt32(4);
-                Restaurant newRestaurant = new Restaurant(restaurantId, restaurantName, restaurantLocation, restaurantDelivery, restaurantCusineId);
+                Restaurant newRestaurant = new Restaurant(restaurantName, restaurantLocation, restaurantDelivery, restaurantCusineId);
             }
             if (rdr != null)
             {
@@ -145,5 +146,16 @@ namespace RestaurantApp
                conn.Close();
            }
         }
+
+        public static void DeleteAll()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("DELETE FROM restaurant;", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+
     }
 }
