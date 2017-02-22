@@ -12,7 +12,7 @@ namespace RestaurantApp
         {
             DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=restaurant_test;Integrated Security=SSPI;";
         }
-// this will test that no doubles are created
+        // this will test that no doubles are created
         [Fact]
         public void Equals_TestIfEqual_true()
         {
@@ -25,7 +25,7 @@ namespace RestaurantApp
                 Assert.Equal(restaurant1, restaurant2);
             }
         }
-// this will test the get all method
+        // this will test the get all method
         [Fact]
         public void GetAll_ReturnAllRestuarants_list()
         {
@@ -49,39 +49,39 @@ namespace RestaurantApp
             // }
             Assert.Equal(testRestaurantList, resultRestaurantList);
         }
-// this will test the save method
+        // this will test the save method
         [Fact]
         public void Save_TestIfSaved_True()
         {
-          //Arrange
-          Restaurant restaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
-          restaurant1.Save();
+            //Arrange
+            Restaurant restaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
+            restaurant1.Save();
 
-          List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1};
-          List<Restaurant> resultRestaurantList = Restaurant.GetAll();
+            List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1};
+            List<Restaurant> resultRestaurantList = Restaurant.GetAll();
 
-          //Assert
-          Assert.Equal(testRestaurantList, resultRestaurantList);
-      }
+            //Assert
+            Assert.Equal(testRestaurantList, resultRestaurantList);
+        }
 
-// this will test the GetId method
+        // this will test the GetId method
         [Fact]
         public void GetId_TestIfGetId_id()
         {
-        //Arrange
-        Restaurant restaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
-        restaurant1.Save();
+            //Arrange
+            Restaurant restaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
+            restaurant1.Save();
 
-        //Act
-        Restaurant savedRestaurant = Restaurant.GetAll()[0];
-        int result = savedRestaurant.GetId();
-        int testId = restaurant1.GetId();
+            //Act
+            Restaurant savedRestaurant = Restaurant.GetAll()[0];
+            int result = savedRestaurant.GetId();
+            int testId = restaurant1.GetId();
 
-        //Assert
-          Assert.Equal(testId, result);
+            //Assert
+            Assert.Equal(testId, result);
         }
 
-// this will allow multiple tests to run at once
+        // this will allow multiple tests to run at once
         public void Dispose()
         {
             Restaurant.DeleteAll();

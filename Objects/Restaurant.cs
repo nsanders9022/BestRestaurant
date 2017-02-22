@@ -21,7 +21,7 @@ namespace RestaurantApp
             _id = Id;
         }
 
-// ensures no doubles are created in table
+        // ensures no doubles are created in table
         public override bool Equals(System.Object otherResturant)
         {
             if (!(otherResturant is Restaurant))
@@ -42,14 +42,14 @@ namespace RestaurantApp
         }
         public override int GetHashCode()
         {
-             return this.GetName().GetHashCode();
+            return this.GetName().GetHashCode();
         }
-// get id
+        // get id
         public int GetId()
         {
             return _id;
         }
-// get and set name
+        // get and set name
         public string GetName()
         {
             return _name;
@@ -59,17 +59,17 @@ namespace RestaurantApp
         {
             _name = Name;
         }
-// get location
+        // get location
         public string GetLocation()
         {
             return _location;
         }
-// get delivery
+        // get delivery
         public bool GetDelivery()
         {
             return _delivery;
         }
-// get cuisine id
+        // get cuisine id
         public int GetCuisineId()
         {
             return _cuisineId;
@@ -84,7 +84,7 @@ namespace RestaurantApp
             }
         }
 
-// get all method for Restaurant list
+        // get all method for Restaurant list
 
         public static List<Restaurant> GetAll()
         {
@@ -124,7 +124,7 @@ namespace RestaurantApp
             }
             return AllRestaurants;
         }
-// save method for each restaurant
+        // save method for each restaurant
         public void Save()
         {
             SqlConnection conn = DB.Connection();
@@ -148,19 +148,19 @@ namespace RestaurantApp
             SqlDataReader rdr = cmd.ExecuteReader();
 
             while(rdr.Read())
-           {
-               this._id = rdr.GetInt32(0);
-           }
-           if (rdr != null)
-           {
-               rdr.Close();
-           }
-           if (conn != null)
-           {
-               conn.Close();
-           }
+            {
+                this._id = rdr.GetInt32(0);
+            }
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
         }
-// method to run multiple tests at once
+        // method to run multiple tests at once
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();
