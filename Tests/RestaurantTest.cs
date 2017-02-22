@@ -83,7 +83,7 @@ namespace RestaurantApp
 
 // find based on id
         [Fact]
-       public void Find_FindAnimalById_true()
+       public void Find_FindRestaurantById_true()
        {
            Restaurant testRestaurant = new Restaurant("sudocipe", "seattle", false, 1);
            testRestaurant.Save();

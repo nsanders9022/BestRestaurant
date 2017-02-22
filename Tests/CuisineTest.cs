@@ -42,7 +42,7 @@ namespace RestaurantApp
 
         // this will test the save method
         [Fact]
-        public void Save_TestIfSaved_True()
+        public void Save_TestIfSaved_saved()
         {
             //Arrange
             Cuisine cuisine1 = new Cuisine("american fusion");
@@ -55,6 +55,33 @@ namespace RestaurantApp
             Assert.Equal(testCuisineList, resultCuisineList);
         }
 
+        // get cuisine based on id
+        [Fact]
+        public void GetId_TestIfGetId_id()
+        {
+            //Arrange
+            Cuisine cuisine1 = new Cuisine("mexican");
+            cuisine1.Save();
+
+            //Act
+            Cuisine savedCuisine = Cuisine.GetAll()[0];
+            int result = savedCuisine.GetId();
+            int testId = cuisine1.GetId();
+
+            //Assert
+            Assert.Equal(testId, result);
+        }
+
+        // find based on id
+        [Fact]
+        public void Find_FindCuisineById_Q()
+        {
+           Cuisine testCuisine = new Cuisine("american");
+           testCuisine.Save();
+
+           Cuisine foundCuisine = Cuisine.Find(testCuisine.GetId());
+           Assert.Equal(testCuisine, foundCuisine);
+        }
         // this will allow multiple tests to run at once
         public void Dispose()
         {
