@@ -114,7 +114,7 @@ namespace RestaurantApp
             // Act
             testCuisine.Update(newCuisine);
 
-            string result = testCuisine.GetType();
+            string result = testCuisine.GetCuisineType();
 
             // Assert
             Assert.Equal(newCuisine, result);

@@ -11,7 +11,7 @@
   <select name="cuisine-id">
     @foreach (var cuisine in Model)
     {
-      <option value="@cuisine.GetId()">@cuisine.GetType()</option>
+      <option value="@cuisine.GetId()">@cuisine.GetCuisineType()</option>
     }
   </select>
   <button type="submit">Add new restaurant</button>

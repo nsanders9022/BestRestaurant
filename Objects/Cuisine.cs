@@ -9,10 +9,10 @@ namespace RestaurantApp
         private int _id;
         private string _type;
 
-        public Cuisine(string Type, int Id = 0)
+        public Cuisine(string CuisineType, int Id = 0)
         {
             _id = Id;
-            _type = Type;
+            _type = CuisineType;
         }
 
         public override bool Equals(System.Object otherCuisine)
@@ -25,14 +25,14 @@ namespace RestaurantApp
             {
                 Cuisine newCuisine = (Cuisine) otherCuisine;
                 bool idEquality = this.GetId() == newCuisine.GetId();
-                bool typeEquality = this.GetType() == newCuisine.GetType();
+                bool typeEquality = this.GetCuisineType() == newCuisine.GetCuisineType();
                 return (idEquality && typeEquality);
             }
         }
 
         public override int GetHashCode()
         {
-            return this.GetType().GetHashCode();
+            return this.GetCuisineType().GetHashCode();
         }
 
         public int GetId()
@@ -40,14 +40,14 @@ namespace RestaurantApp
             return _id;
         }
 
-        public string GetType()
+        public string GetCuisineType()
         {
             return _type;
         }
 
-        public void SetType(string newType)
+        public void SetCuisineType(string newCuisineType)
         {
-            _type = newType;
+            _type = newCuisineType;
         }
 
         // get all method for cusine list
@@ -65,9 +65,9 @@ namespace RestaurantApp
             while(rdr.Read())
             {
                 int cuisineId = rdr.GetInt32(0);
-                string cuisineType = rdr.GetString(1);
+                string cuisineCuisineType = rdr.GetString(1);
 
-                Cuisine newCuisine = new Cuisine(cuisineType, cuisineId);
+                Cuisine newCuisine = new Cuisine(cuisineCuisineType, cuisineId);
                 AllCuisines.Add(newCuisine);
             }
             if (rdr != null)
@@ -86,9 +86,9 @@ namespace RestaurantApp
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO cuisine (type) OUTPUT INSERTED.id VALUES (@CuisineType);", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO cuisine (type) OUTPUT INSERTED.id VALUES (@CuisineCuisineType);", conn);
 
-            SqlParameter typeParameter = new SqlParameter("@CuisineType", this.GetType());
+            SqlParameter typeParameter = new SqlParameter("@CuisineCuisineType", this.GetCuisineType());
 
             cmd.Parameters.Add(typeParameter);
 
@@ -122,16 +122,16 @@ namespace RestaurantApp
             SqlDataReader rdr = cmd.ExecuteReader();
 
             int foundCuisineId = 0;
-            string foundCuisineType = null;
+            string foundCuisineCuisineType = null;
 
 
             while(rdr.Read())
             {
                 foundCuisineId = rdr.GetInt32(0);
-                foundCuisineType = rdr.GetString(1);
+                foundCuisineCuisineType = rdr.GetString(1);
             }
 
-            Cuisine foundCuisine = new Cuisine(foundCuisineType, foundCuisineId);
+            Cuisine foundCuisine = new Cuisine(foundCuisineCuisineType, foundCuisineId);
 
             if (rdr != null)
             {
@@ -153,9 +153,9 @@ namespace RestaurantApp
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant WHERE cuisine_id = @TypeId;", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant WHERE cuisine_id = @CuisineTypeId;", conn);
             SqlParameter typeIdParameter = new SqlParameter();
-            typeIdParameter.ParameterName = "@TypeId";
+            typeIdParameter.ParameterName = "@CuisineTypeId";
             typeIdParameter.Value = this.GetId();
             cmd.Parameters.Add(typeIdParameter);
             SqlDataReader rdr = cmd.ExecuteReader();
@@ -190,17 +190,17 @@ namespace RestaurantApp
         }
 
         //Update category name method
-        public void Update(string newType)
+        public void Update(string newCuisineType)
         {
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("UPDATE cuisine SET type = @NewType OUTPUT INSERTED.type WHERE id = @CuisineId;", conn);
+            SqlCommand cmd = new SqlCommand("UPDATE cuisine SET type = @NewCuisineType OUTPUT INSERTED.type WHERE id = @CuisineId;", conn);
 
-            SqlParameter newTypeParameter = new SqlParameter();
-            newTypeParameter.ParameterName = "@newType";
-            newTypeParameter.Value = newType;
-            cmd.Parameters.Add(newTypeParameter);
+            SqlParameter newCuisineTypeParameter = new SqlParameter();
+            newCuisineTypeParameter.ParameterName = "@newCuisineType";
+            newCuisineTypeParameter.Value = newCuisineType;
+            cmd.Parameters.Add(newCuisineTypeParameter);
 
             SqlParameter cuisineIdParameter = new SqlParameter();
             cuisineIdParameter.ParameterName = "@CuisineId";
