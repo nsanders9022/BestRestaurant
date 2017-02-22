@@ -160,6 +160,54 @@ namespace RestaurantApp
                 conn.Close();
             }
         }
+        // method to find based on ID
+        public static Restaurant Find(int id)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant WHERE id = @RestaurantId;", conn);
+            SqlParameter restaurantIdParameter = new SqlParameter();
+            restaurantIdParameter.ParameterName = "@RestaurantId";
+            restaurantIdParameter.Value = id.ToString();
+            cmd.Parameters.Add(restaurantIdParameter);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int foundRestaurantId = 0;
+            string foundRestaurantName = null;
+            string foundRestaurantLocation = null;
+            bool foundRestaurantDelivery = false;
+            int foundRestaurantCuisineId = 0;
+
+            while(rdr.Read())
+            {
+                foundRestaurantId = rdr.GetInt32(0);
+                foundRestaurantName = rdr.GetString(1);
+                foundRestaurantLocation = rdr.GetString(2);
+                if (rdr.GetByte(3) == 1)
+                {
+                    foundRestaurantDelivery = true;
+                }
+                else
+                {
+                    foundRestaurantDelivery = false;
+                }
+                foundRestaurantCuisineId = rdr.GetInt32(4);
+            }
+
+            Restaurant foundRestaurant = new Restaurant(foundRestaurantName, foundRestaurantLocation, foundRestaurantDelivery, foundRestaurantCuisineId, foundRestaurantId);
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return foundRestaurant;
+        }
+
         // method to run multiple tests at once
         public static void DeleteAll()
         {

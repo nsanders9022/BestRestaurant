@@ -81,6 +81,17 @@ namespace RestaurantApp
             Assert.Equal(testId, result);
         }
 
+// find based on id
+        [Fact]
+       public void Find_FindAnimalById_true()
+       {
+           Restaurant testRestaurant = new Restaurant("sudocipe", "seattle", false, 1);
+           testRestaurant.Save();
+
+           Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
+           Assert.Equal(testRestaurant, foundRestaurant);
+       }
+
         // this will allow multiple tests to run at once
         public void Dispose()
         {

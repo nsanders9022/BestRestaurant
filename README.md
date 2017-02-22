@@ -19,8 +19,6 @@ This webpage will take user input about Restaurants and then sort that informati
 * Nancy
 * SQL
 
-
-
 ## Specs
 #### User can add Restaurants
 * Input: SUDOCIPE
