@@ -69,6 +69,17 @@ namespace RestaurantApp
                 return View["success.cshtml"];
             };
 
+            Get["cuisine/delete/{id}"] = parameters => {
+                Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
+                return View["cuisine_delete.cshtml", SelectedCuisine];
+            };
+
+            Delete["cuisine/delete/{id}"] = parameters => {
+                Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
+                SelectedCuisine.Delete();
+                return View["success.cshtml"];
+            };
+
         }
     }
 }
