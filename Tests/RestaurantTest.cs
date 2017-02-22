@@ -36,20 +36,34 @@ namespace RestaurantApp
 
             List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1, restaurant2};
             List<Restaurant> resultRestaurantList = Restaurant.GetAll();
-
-            foreach (Restaurant restaurant in testRestaurantList)
-            {
-                Console.WriteLine("test " + restaurant.GetName());
-
-            }
-            foreach (Restaurant restaurant in resultRestaurantList)
-            {
-                Console.WriteLine("result " + restaurant.GetName());
-
-            }
+            // this will list out each restaurant in each list to make sure its there
+            // foreach (Restaurant restaurant in testRestaurantList)
+            // {
+            //     Console.WriteLine("test " + restaurant.GetName());
+            //
+            // }
+            // foreach (Restaurant restaurant in resultRestaurantList)
+            // {
+            //     Console.WriteLine("result " + restaurant.GetName());
+            //
+            // }
             Assert.Equal(testRestaurantList, resultRestaurantList);
         }
 // this will test the save method
+        [Fact]
+        public void Save_TestIfSaved_True()
+        {
+          //Arrange
+          Restaurant restaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
+          restaurant1.Save();
+
+          List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1};
+          List<Restaurant> resultRestaurantList = Restaurant.GetAll();
+
+          //Assert
+          Assert.Equal(testRestaurantList, resultRestaurantList);
+      }
+
 
 // this will allow multiple tests to run at once
         public void Dispose()
