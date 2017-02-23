@@ -304,6 +304,59 @@ namespace RestaurantApp
             return cuisineName;
         }
 
+
+
+        // method to search based on name
+        public static List<Restaurant> SearchDelivery(int deliveryValue)
+        {
+            List<Restaurant> deliveryRestaurant = new List<Restaurant>{};
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant WHERE delivery = @RestaurantDelivery;", conn);
+            SqlParameter restaurantNameParameter = new SqlParameter();
+            restaurantNameParameter.ParameterName = "@RestaurantDelivery";
+            restaurantNameParameter.Value = deliveryValue;
+            cmd.Parameters.Add(restaurantNameParameter);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                int restaurantId = rdr.GetInt32(0);
+                string restaurantName = rdr.GetString(1);
+                string restaurantLocation = rdr.GetString(2);
+                bool restaurantDelivery;
+                if (rdr.GetByte(3) == 1)
+                {
+                    restaurantDelivery = true;
+                }
+                else
+                {
+                    restaurantDelivery = false;
+                }
+                int restaurantCusineId = rdr.GetInt32(4);
+                Restaurant newRestaurant = new Restaurant(restaurantName, restaurantLocation, restaurantDelivery, restaurantCusineId, restaurantId);
+                deliveryRestaurant.Add(newRestaurant);
+            }
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return deliveryRestaurant;
+        }
+
+
+
+
+
+
+
+
+
 // update restaurant name
         public void Update(string newRestaurantName)
         {
@@ -353,8 +406,6 @@ namespace RestaurantApp
                 conn.Close();
             }
         }
-
-
 
         // method to run multiple tests at once
         public static void DeleteAll()

@@ -140,6 +140,7 @@ namespace RestaurantApp
 
             testRestaurant1.Save();
             testRestaurant2.Save();
+            testRestaurant3.Save();
 
             testRestaurant2.Delete();
 
@@ -147,6 +148,23 @@ namespace RestaurantApp
             List<Restaurant> testRestaurantList = new List<Restaurant> {testRestaurant1, testRestaurant3};
 
             Assert.Equal(resultRestaurant, testRestaurantList);
+        }
+
+        public void SearchDelivery_deliveryPlaces_list()
+        {
+            Restaurant testRestaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
+            Restaurant testRestaurant2 = new Restaurant("Dough", "seattle", true, 1);
+            Restaurant testRestaurant3 = new Restaurant("Sugar Cookies", "Portland", true, 1);
+            Restaurant testRestaurant4 = new Restaurant("Luke's Diner", "Portland", false, 1);
+            testRestaurant1.Save();
+            testRestaurant2.Save();
+            testRestaurant3.Save();
+            testRestaurant4.Save();
+
+            List<Restaurant> resultRestaurant = Restaurant.SearchDelivery(1);
+            List<Restaurant> testRestaurant = new List<Restaurant>{testRestaurant2, testRestaurant3};
+            Assert.Equal(resultRestaurant, testRestaurant);
+
         }
 
         // this will allow multiple tests to run at once
