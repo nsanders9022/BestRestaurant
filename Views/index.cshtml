@@ -1,3 +1,15 @@
 <h1>Seattles Best Restaurants</h1>
 <h4><a href="/cuisines">View Cuisines</a></h4>
 <h4><a href="/restaurants">View Restaurants</a></h4>
+
+<form action="/restaurant/search" method="post">
+    <label for="restaurant-search">Search by restaurant name:</label>
+    <input id="restaurant-search" name="restaurant-search" type="text">
+    <button type="submit">Search</button>
+</form>
+
+<form action="/location/search" method="post">
+    <label for="location-search">Search by location:</label>
+    <input id="location-search" name="location-search" type="text">
+    <button type="submit">Search</button>
+</form>

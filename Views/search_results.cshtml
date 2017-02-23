@@ -1,0 +1,14 @@
+
+  <h1>Search Results</h1>
+  @if(@Model != null)
+  {
+    <p>Name: @Model.GetName()</p>
+    <p>Location: @Model.GetLocation()</p>
+    <p>Delivery: @Model.UserViewDelivery()</p>
+  }
+  else
+  {
+    <h2>No restaurant Found</h2>
+  }
+
+  <p><a href="/">Go Back Home</a></p>

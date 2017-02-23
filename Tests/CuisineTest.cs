@@ -156,21 +156,21 @@ namespace RestaurantApp
 
         // search all restaurants by name
         [Fact]
-        public void SearchLocation_FindRestaurantByLocation_Restaurant()
+        public static void SearchLocation_FindRestaurantByLocation_Restaurant()
         {
 
-            Cuisine testCuisine = new Cuisine("mexican");
-            testCuisine.Save();
+            // Cuisine testCuisine = new Cuisine("mexican");
+            // testCuisine.Save();
 
-            Restaurant restaurant1 = new Restaurant("sudocipe", "oregon", true, testCuisine.GetId());
-            Restaurant restaurant2 = new Restaurant("Dough", "seattle", true, testCuisine.GetId());
-            Restaurant restaurant3 = new Restaurant("Place", "seattle", false, testCuisine.GetId());
+            Restaurant restaurant1 = new Restaurant("sudocipe", "oregon", true, 1);
+            Restaurant restaurant2 = new Restaurant("Dough", "seattle", true, 2);
+            Restaurant restaurant3 = new Restaurant("Place", "seattle", false, 4);
             restaurant1.Save();
             restaurant2.Save();
             restaurant3.Save();
 
             List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant2, restaurant3};
-            List<Restaurant> resultRestaurantList = testCuisine.SearchLocation("seattle");
+            List<Restaurant> resultRestaurantList = Cuisine.SearchLocation("seattle");
 
             Assert.Equal(testRestaurantList, resultRestaurantList);
         }

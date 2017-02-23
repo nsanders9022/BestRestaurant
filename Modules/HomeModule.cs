@@ -48,7 +48,7 @@ namespace RestaurantApp
                 Restaurant.DeleteAll();
                 return View["cleared.cshtml"];
             };
-// for cuisines
+            // for cuisines
             Get["/cuisines/{id}"] = parameters => {
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 var SelectedCuisine = Cuisine.Find(parameters.id);
@@ -79,10 +79,22 @@ namespace RestaurantApp
                 SelectedCuisine.Delete();
                 return View["success.cshtml"];
             };
-// for restaurant
+            // for restaurant
             Get["/restaurants/{id}"] = parameters => {
                 Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
                 return View["restaurant.cshtml", SelectedRestaurant];
+            };
+
+            // search by restaurant namespace
+            Post["/restaurant/search"] = _ => {
+                Restaurant foundRestaurant = Restaurant.SearchName(Request.Form["restaurant-search"]);
+                return View["search_results.cshtml", foundRestaurant];
+            };
+
+            // posts results of search for location
+            Post["/location/search"] = _ => {
+                List<Restaurant> AllSearchedRestaurants =  Cuisine.SearchLocation(Request.Form["location-search"]);
+                return View["location_search.cshtml", AllSearchedRestaurants];
             };
         }
     }

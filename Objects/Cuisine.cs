@@ -190,7 +190,7 @@ namespace RestaurantApp
         }
 
     // method to search based on delivery
-           public List<Restaurant> SearchLocation(string Location)
+           public static List<Restaurant> SearchLocation(string Location)
            {
                List<Restaurant> foundResaurantList = new List<Restaurant>{};
                SqlConnection conn = DB.Connection();
