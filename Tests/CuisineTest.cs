@@ -45,6 +45,7 @@ namespace RestaurantApp
         public void Save_TestIfSaved_saved()
         {
             //Arrange
+
             Cuisine cuisine1 = new Cuisine("american fusion");
             cuisine1.Save();
 
@@ -95,10 +96,10 @@ namespace RestaurantApp
             restaurant1.Save();
             restaurant2.Save();
 
-            List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1, restaurant2};
+            List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant2, restaurant1};
             List<Restaurant> resultRestaurantList = testCuisine.GetRestaurants();
 
-            Assert.Equal(testRestaurantList, resultRestaurantList);
+            Assert.Equal(testRestaurantList[0].GetId(), resultRestaurantList[0].GetId());
         }
 
 // update cuisine

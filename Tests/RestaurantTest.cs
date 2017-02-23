@@ -34,8 +34,17 @@ namespace RestaurantApp
             restaurant1.Save();
             restaurant2.Save();
 
-            List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant1, restaurant2};
+            List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant2, restaurant1};
             List<Restaurant> resultRestaurantList = Restaurant.GetAll();
+            foreach (Restaurant restaurant in testRestaurantList)
+            {
+              Console.WriteLine("test: " + restaurant.GetName());
+
+            }
+            foreach (Restaurant restaurant in resultRestaurantList)
+            {
+              Console.WriteLine("result: " + restaurant.GetName());
+            }
 
             Assert.Equal(testRestaurantList, resultRestaurantList);
         }
@@ -80,6 +89,17 @@ namespace RestaurantApp
 
            Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
            Assert.Equal(testRestaurant, foundRestaurant);
+       }
+
+       [Fact]
+       public void SearchName_FindRestaurantByName_Restaurant()
+       {
+         Restaurant testRestaurant  = new Restaurant("sudocipe", "seattle", false, 1);
+         testRestaurant.Save();
+
+         Restaurant searchedRestaurant = Restaurant.SearchName(testRestaurant.GetName());
+
+         Assert.Equal(testRestaurant, searchedRestaurant);
        }
 
         // this will allow multiple tests to run at once
