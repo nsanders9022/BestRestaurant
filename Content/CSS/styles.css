@@ -1,6 +1,8 @@
 .banner {
-    height: 250px;
+    height: 300px;
     width: 100%;
+    background-image: url("http://www.shximai.com/data/out/163/66931628-restaurant-wallpapers.jpg");
+    background-position: center;
 }
 
 body {
@@ -8,19 +10,30 @@ body {
 }
 
 .container {
-    width: 90%;
+    width: 60%;
 }
 
 .header {
     text-align: center;
     font-weight: bold;
     font-style: italic;
-    font-size: 45px;
+    font-size: 65px;
     padding-top: 100px;
-    text-shadow: 3px 3px gray;
+    margin-top: -10px;
+    text-shadow: 3px 3px #32413A;
+    color: #AEAF73;
+
 }
 
 button {
     background-color: #7d8e72;
     color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    font-size: 16px;
 }

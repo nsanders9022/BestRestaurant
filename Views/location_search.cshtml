@@ -5,7 +5,7 @@
 
 @if (@Model.Count == 0)
 {
-  <p>No restaurants in that location have been entered!</p>
+  <h1>No restaurants in @Request.Form["location-search"] have been entered yet.</h1>
 }
 else
 {
