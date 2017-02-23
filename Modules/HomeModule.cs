@@ -107,6 +107,17 @@ namespace RestaurantApp
                 SelectedRestaurant.Update(Request.Form["restaurant-name"]);
                 return View["success.cshtml"];
             };
+
+            Get["restaurant/delete/{id}"] = parameters => {
+                Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
+                return View["restaurant_delete.cshtml", SelectedRestaurant];
+            };
+
+            Delete["restaurant/delete/{id}"] = parameters => {
+                Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
+                SelectedRestaurant.Delete();
+                return View["success.cshtml"];
+            };
         }
     }
 }

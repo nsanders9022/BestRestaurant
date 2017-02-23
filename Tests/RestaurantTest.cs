@@ -117,20 +117,37 @@ namespace RestaurantApp
             Assert.Equal(testString, resultString);
         }
 
-        // [Fact]
-        // public void Update_UpdateName_void()
-        // {
-        //     Restaurant testRestaurant  = new Restaurant("sudocipe", "seattle", false, 1);
-        //     testRestaurant.Save();
-        //
-        //     string newName = "Jim's";
-        //
-        //     testRestaurant.Update(newName);
-        //
-        //     string result = testRestaurant.GetName();
-        //
-        //     Assert.Equal(newName, result);
-        // }
+        [Fact]
+        public void Update_UpdateName_null()
+        {
+            Restaurant testRestaurant  = new Restaurant("sudocipe", "seattle", false, 1);
+            testRestaurant.Save();
+
+            string newName = "Jim's";
+
+            testRestaurant.Update(newName);
+
+            string result = testRestaurant.GetName();
+
+            Assert.Equal(newName, result);
+        }
+
+        public void Delete_DeleteRestaurantFromDatabase_null()
+        {
+            Restaurant testRestaurant1 = new Restaurant("sudocipe", "seattle", false, 1);
+            Restaurant testRestaurant2 = new Restaurant("Dough", "seattle", true, 1);
+            Restaurant testRestaurant3 = new Restaurant("Sugar Cookies", "Portland", true, 1);
+
+            testRestaurant1.Save();
+            testRestaurant2.Save();
+
+            testRestaurant2.Delete();
+
+            List<Restaurant> resultRestaurant = Restaurant.GetAll();
+            List<Restaurant> testRestaurantList = new List<Restaurant> {testRestaurant1, testRestaurant3};
+
+            Assert.Equal(resultRestaurant, testRestaurantList);
+        }
 
         // this will allow multiple tests to run at once
         public void Dispose()

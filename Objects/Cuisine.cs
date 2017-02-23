@@ -283,7 +283,7 @@ namespace RestaurantApp
             cuisineIdParameter.Value = this.GetId();
 
             cmd.Parameters.Add(cuisineIdParameter);
-            cmd.ExecuteReader();
+            cmd.ExecuteNonQuery();
 
             if (conn != null)
             {

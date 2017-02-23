@@ -336,6 +336,24 @@ namespace RestaurantApp
             }
         }
 
+        public void Delete()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM restaurant WHERE id = @RestaurantId;", conn);
+
+            SqlParameter restaurantIdParameter = new SqlParameter("@RestaurantId", this.GetId());
+
+            cmd.Parameters.Add(restaurantIdParameter);
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
 
 
         // method to run multiple tests at once

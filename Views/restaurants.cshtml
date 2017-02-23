@@ -8,7 +8,7 @@ else
   <ul>
     @foreach (var restaurant in Model)
     {
-      <li><a href='/restaurants/@restaurant.GetId()'>@restaurant.GetName()</a>|  <a href="/restaurant/edit/@restaurant.GetId()">Edit</a></li>
+      <li><a href='/restaurants/@restaurant.GetId()'>@restaurant.GetName()</a> |  <a href="/restaurant/delete/@restaurant.GetId()">Edit</a>  | <a href="/restaurant/delete/@restaurant.GetId()">Delete</a></li>
     }
   </ul>
   <form action="/restaurants/delete" method="post">
