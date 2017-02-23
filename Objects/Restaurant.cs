@@ -273,7 +273,7 @@ namespace RestaurantApp
         }
 
 
-// method to find based on ID
+// method to find cuisine name based on cuisine_id
         public string CuisineName()
         {
             SqlConnection conn = DB.Connection();
@@ -286,28 +286,10 @@ namespace RestaurantApp
             cmd.Parameters.Add(cuisineIdParameter);
             SqlDataReader rdr = cmd.ExecuteReader();
 
-            // int foundRestaurantId = 0;
-            // string foundRestaurantName = null;
-            // string foundRestaurantLocation = null;
-            // bool foundRestaurantDelivery = false;
-            // int foundRestaurantCuisineId = 0;
-
             string cuisineName = "";
 
             while(rdr.Read())
             {
-                // foundRestaurantId = rdr.GetInt32(0);
-                // foundRestaurantName = rdr.GetString(1);
-                // foundRestaurantLocation = rdr.GetString(2);
-                // if (rdr.GetByte(3) == 1)
-                // {
-                //     foundRestaurantDelivery = true;
-                // }
-                // else
-                // {
-                //     foundRestaurantDelivery = false;
-                // }
-                // foundRestaurantCuisineId = rdr.GetInt32(4);
                 cuisineName = rdr[0].ToString();
             }
 
@@ -319,12 +301,40 @@ namespace RestaurantApp
             {
                 conn.Close();
             }
-
-
             return cuisineName;
         }
 
+// update restaurant name
+        public void Update(string newRestaurantName)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
 
+            SqlCommand cmd = new SqlCommand("UPDATE restaurant SET name = @newRestaurantName OUTPUT INSERTED.name WHERE id = @RestaurantId;", conn);
+
+            SqlParameter newRestaurantNameParameter = new SqlParameter("@newRestaurantName", newRestaurantName);
+            cmd.Parameters.Add(newRestaurantNameParameter);
+
+            SqlParameter restaurantIdParameter = new SqlParameter("@RestaurantId", this.GetId());
+            cmd.Parameters.Add(restaurantIdParameter);
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                this._name = rdr.GetString(0);
+            }
+
+            if (rdr !=null)
+            {
+                rdr.Close();
+            }
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
 
 
 
@@ -337,7 +347,5 @@ namespace RestaurantApp
             cmd.ExecuteNonQuery();
             conn.Close();
         }
-
-
     }
 }

@@ -117,6 +117,21 @@ namespace RestaurantApp
             Assert.Equal(testString, resultString);
         }
 
+        // [Fact]
+        // public void Update_UpdateName_void()
+        // {
+        //     Restaurant testRestaurant  = new Restaurant("sudocipe", "seattle", false, 1);
+        //     testRestaurant.Save();
+        //
+        //     string newName = "Jim's";
+        //
+        //     testRestaurant.Update(newName);
+        //
+        //     string result = testRestaurant.GetName();
+        //
+        //     Assert.Equal(newName, result);
+        // }
+
         // this will allow multiple tests to run at once
         public void Dispose()
         {
