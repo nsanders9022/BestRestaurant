@@ -74,13 +74,28 @@ namespace RestaurantApp
         {
             return _cuisineId;
         }
+
         public int TranslateDelivery()
         {
             if (this._delivery == true)
             {
                 return 1;
-            } else {
+            }
+            else
+            {
                 return 0;
+            }
+        }
+
+        public string UserViewDelivery()
+        {
+            if (this._delivery == true)
+            {
+                return "Yes";
+            }
+            else
+            {
+                return "No";
             }
         }
 
