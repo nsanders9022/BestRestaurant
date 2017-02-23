@@ -46,3 +46,10 @@ This webpage will take user input about Restaurants and then sort that informati
 MIT License
 
 Copyright (c) 2017 Keely Glenn and Nicole Sanders
+
+
+
+TOMORROW:
+
+Search by cuisine, name, delivery, location 
+Sort

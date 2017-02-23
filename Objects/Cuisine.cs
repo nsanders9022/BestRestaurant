@@ -153,7 +153,7 @@ namespace RestaurantApp
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant WHERE cuisine_id = @CuisineTypeId;", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant WHERE cuisine_id = @CuisineTypeId ORDER BY name;", conn);
             SqlParameter typeIdParameter = new SqlParameter();
             typeIdParameter.ParameterName = "@CuisineTypeId";
             typeIdParameter.Value = this.GetId();

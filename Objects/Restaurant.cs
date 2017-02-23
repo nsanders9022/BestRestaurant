@@ -108,7 +108,7 @@ namespace RestaurantApp
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant;", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant ORDER BY name;", conn);
             SqlDataReader rdr = cmd.ExecuteReader();
 
             while(rdr.Read())
