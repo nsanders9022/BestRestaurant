@@ -79,20 +79,20 @@ namespace RestaurantApp
                 SelectedCuisine.Delete();
                 return View["success.cshtml"];
             };
-            // for restaurant
+            
             Get["/restaurants/{id}"] = parameters => {
                 Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
                 return View["restaurant.cshtml", SelectedRestaurant];
             };
 
-            Get["/restaurants/{id}"] = parameters => {
-                Dictionary<string, object> model = new Dictionary<string, object>{};
-                Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
-                Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
-                model.Add("cuisine", SelectedCuisine);
-                model.Add("restaurant", SelectedRestaurant);
-                return View["restaurant.cshtml", model];
-            };
+            // Get["/restaurants/{id}"] = parameters => {
+            //     Dictionary<string, object> model = new Dictionary<string, object>{};
+            //     Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
+            //     Cuisine SelectedCuisine = new Cuisine(SelectedRestaurant.GetCuisineId());
+            //     model.Add("cuisine", SelectedCuisine);
+            //     model.Add("restaurant", SelectedRestaurant);
+            //     return View["restaurant.cshtml", model];
+            // };
 
             // search by restaurant namespace
             Post["/restaurant/search"] = _ => {

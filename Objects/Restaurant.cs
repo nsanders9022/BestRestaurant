@@ -273,6 +273,61 @@ namespace RestaurantApp
         }
 
 
+// method to find based on ID
+        public string CuisineName()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT type FROM cuisine WHERE id = @CuisineId;", conn);
+            SqlParameter cuisineIdParameter = new SqlParameter();
+            cuisineIdParameter.ParameterName = "@CuisineId";
+            cuisineIdParameter.Value = this.GetCuisineId().ToString();
+            cmd.Parameters.Add(cuisineIdParameter);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            // int foundRestaurantId = 0;
+            // string foundRestaurantName = null;
+            // string foundRestaurantLocation = null;
+            // bool foundRestaurantDelivery = false;
+            // int foundRestaurantCuisineId = 0;
+
+            string cuisineName = "";
+
+            while(rdr.Read())
+            {
+                // foundRestaurantId = rdr.GetInt32(0);
+                // foundRestaurantName = rdr.GetString(1);
+                // foundRestaurantLocation = rdr.GetString(2);
+                // if (rdr.GetByte(3) == 1)
+                // {
+                //     foundRestaurantDelivery = true;
+                // }
+                // else
+                // {
+                //     foundRestaurantDelivery = false;
+                // }
+                // foundRestaurantCuisineId = rdr.GetInt32(4);
+                cuisineName = rdr[0].ToString();
+            }
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+
+
+            return cuisineName;
+        }
+
+
+
+
+
         // method to run multiple tests at once
         public static void DeleteAll()
         {

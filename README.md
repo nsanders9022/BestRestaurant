@@ -53,7 +53,9 @@ TOMORROW:
 
 Search by cuisine, name, delivery, location
 Sort by other thing?
+
 display cuisine type on restaurant page
+
 add delete and edit to restaurants
 further exploration if we want
 go through technical interview questions

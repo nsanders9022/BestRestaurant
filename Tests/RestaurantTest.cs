@@ -103,6 +103,20 @@ namespace RestaurantApp
             Assert.Equal(testRestaurant, searchedRestaurant);
         }
 
+        [Fact]
+        public void CuisineName_GetNameBasedOnId_string()
+        {
+            Cuisine newCuisine = new Cuisine("indian");
+            newCuisine.Save();
+            Restaurant testRestaurant  = new Restaurant("sudocipe", "seattle", false, newCuisine.GetId());
+            testRestaurant.Save();
+
+            string testString = "indian";
+            string resultString = testRestaurant.CuisineName();
+
+            Assert.Equal(testString, resultString);
+        }
+
         // this will allow multiple tests to run at once
         public void Dispose()
         {
