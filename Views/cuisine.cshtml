@@ -9,7 +9,7 @@ else
   <ol>
     @foreach (var restaurant in @Model["restaurants"])
     {
-      <li>@restaurant.GetName()</li>
+        <li><a href='/restaurants/@restaurant.GetId()'>@restaurant.GetName()</a></li>
     }
   </ol>
 }

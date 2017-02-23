@@ -51,5 +51,8 @@ Copyright (c) 2017 Keely Glenn and Nicole Sanders
 
 TOMORROW:
 
-Search by cuisine, name, delivery, location 
-Sort
+Search by cuisine, name, delivery, location
+Sort by other thing?
+display cuisine type on restaurant page
+add delete and edit to restaurants
+further exploration if we want
