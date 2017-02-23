@@ -189,6 +189,52 @@ namespace RestaurantApp
             return restaurants;
         }
 
+    // method to search based on delivery
+           public List<Restaurant> SearchLocation(string Location)
+           {
+               List<Restaurant> foundResaurantList = new List<Restaurant>{};
+               SqlConnection conn = DB.Connection();
+               conn.Open();
+
+               SqlCommand cmd = new SqlCommand("SELECT * FROM restaurant WHERE location = @RestaurantLocation;", conn);
+               SqlParameter restaurantLocationParameter = new SqlParameter();
+               restaurantLocationParameter.ParameterName = "@RestaurantLocation";
+               restaurantLocationParameter.Value = Location;
+               cmd.Parameters.Add(restaurantLocationParameter);
+               SqlDataReader rdr = cmd.ExecuteReader();
+
+               while(rdr.Read())
+               {
+                   int foundRestaurantId = rdr.GetInt32(0);
+                   string foundRestaurantName = rdr.GetString(1);
+                   string foundRestaurantLocation = rdr.GetString(2);
+                   bool foundRestaurantDelivery;
+                   if (rdr.GetByte(3) == 1)
+                   {
+                       foundRestaurantDelivery = true;
+                   }
+                   else
+                   {
+                       foundRestaurantDelivery = false;
+                   }
+                   int foundRestaurantCuisineId = rdr.GetInt32(4);
+
+                   Restaurant foundRestaurant = new Restaurant(foundRestaurantName, foundRestaurantLocation, foundRestaurantDelivery, foundRestaurantCuisineId, foundRestaurantId);
+
+                   foundResaurantList.Add(foundRestaurant);
+               }
+
+               if (rdr != null)
+               {
+                   rdr.Close();
+               }
+               if (conn != null)
+               {
+                   conn.Close();
+               }
+               return foundResaurantList;
+           }
+
         //Update category name method
         public void Update(string newCuisineType)
         {
@@ -244,7 +290,6 @@ namespace RestaurantApp
                 conn.Close();
             }
         }
-
 
 
         // method to run multiple tests at once

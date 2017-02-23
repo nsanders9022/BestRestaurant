@@ -38,12 +38,12 @@ namespace RestaurantApp
             List<Restaurant> resultRestaurantList = Restaurant.GetAll();
             foreach (Restaurant restaurant in testRestaurantList)
             {
-              Console.WriteLine("test: " + restaurant.GetName());
+                Console.WriteLine("test: " + restaurant.GetName());
 
             }
             foreach (Restaurant restaurant in resultRestaurantList)
             {
-              Console.WriteLine("result: " + restaurant.GetName());
+                Console.WriteLine("result: " + restaurant.GetName());
             }
 
             Assert.Equal(testRestaurantList, resultRestaurantList);
@@ -80,27 +80,28 @@ namespace RestaurantApp
             Assert.Equal(testId, result);
         }
 
-// find based on id
+        // find based on id
         [Fact]
-       public void Find_FindRestaurantById_true()
-       {
-           Restaurant testRestaurant = new Restaurant("sudocipe", "seattle", false, 1);
-           testRestaurant.Save();
+        public void Find_FindRestaurantById_true()
+        {
+            Restaurant testRestaurant = new Restaurant("sudocipe", "seattle", false, 1);
+            testRestaurant.Save();
 
-           Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
-           Assert.Equal(testRestaurant, foundRestaurant);
-       }
+            Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
+            Assert.Equal(testRestaurant, foundRestaurant);
+        }
 
-       [Fact]
-       public void SearchName_FindRestaurantByName_Restaurant()
-       {
-         Restaurant testRestaurant  = new Restaurant("sudocipe", "seattle", false, 1);
-         testRestaurant.Save();
+        // search all restaurants by name
+        [Fact]
+        public void SearchName_FindRestaurantByName_Restaurant()
+        {
+            Restaurant testRestaurant  = new Restaurant("sudocipe", "seattle", false, 1);
+            testRestaurant.Save();
 
-         Restaurant searchedRestaurant = Restaurant.SearchName(testRestaurant.GetName());
+            Restaurant searchedRestaurant = Restaurant.SearchName(testRestaurant.GetName());
 
-         Assert.Equal(testRestaurant, searchedRestaurant);
-       }
+            Assert.Equal(testRestaurant, searchedRestaurant);
+        }
 
         // this will allow multiple tests to run at once
         public void Dispose()

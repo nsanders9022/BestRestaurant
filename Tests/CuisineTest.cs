@@ -99,7 +99,7 @@ namespace RestaurantApp
             List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant2, restaurant1};
             List<Restaurant> resultRestaurantList = testCuisine.GetRestaurants();
 
-            Assert.Equal(testRestaurantList[0].GetId(), resultRestaurantList[0].GetId());
+            Assert.Equal(testRestaurantList, resultRestaurantList);
         }
 
 // update cuisine
@@ -152,6 +152,27 @@ namespace RestaurantApp
             Assert.Equal(testCuisineList, resultCuisine);
             Assert.Equal(testRestaurantList, resultRestaurant);
 
+        }
+
+        // search all restaurants by name
+        [Fact]
+        public void SearchLocation_FindRestaurantByLocation_Restaurant()
+        {
+
+            Cuisine testCuisine = new Cuisine("mexican");
+            testCuisine.Save();
+
+            Restaurant restaurant1 = new Restaurant("sudocipe", "oregon", true, testCuisine.GetId());
+            Restaurant restaurant2 = new Restaurant("Dough", "seattle", true, testCuisine.GetId());
+            Restaurant restaurant3 = new Restaurant("Place", "seattle", false, testCuisine.GetId());
+            restaurant1.Save();
+            restaurant2.Save();
+            restaurant3.Save();
+
+            List<Restaurant> testRestaurantList = new List<Restaurant> {restaurant2, restaurant3};
+            List<Restaurant> resultRestaurantList = testCuisine.SearchLocation("seattle");
+
+            Assert.Equal(testRestaurantList, resultRestaurantList);
         }
 
         // this will allow multiple tests to run at once
