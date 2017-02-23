@@ -1,6 +1,10 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
 
   <h1>Search Results</h1>
-  @if(@Model != null)
+  @if(@Model != null && @Model.GetName() == @Request.Form["restaurant-search"])
   {
     <p>Name: @Model.GetName()</p>
     <p>Location: @Model.GetLocation()</p>
@@ -8,7 +12,7 @@
   }
   else
   {
-    <h2>No restaurant Found</h2>
+    <h2>No restaurant found with the name of @Request.Form["restaurant-search"]</h2>
   }
 
   <p><a href="/">Go Back Home</a></p>

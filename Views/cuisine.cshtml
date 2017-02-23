@@ -1,3 +1,8 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+
 <h2>Here are all the restaurants that serve this cuisine:</h2>
 
 @if (@Model["restaurants"].Count == 0)
@@ -9,9 +14,9 @@ else
   <ol>
     @foreach (var restaurant in @Model["restaurants"])
     {
-        <li><a href='/restaurants/@restaurant.GetId()'>@restaurant.GetName()</a></li>
+        <li><a href='/restaurants/@restaurant.GetId()'>@restaurant.GetName()</a> |  <a href="/restaurant/edit/@restaurant.GetId()">Edit</a>  | <a href="/restaurant/delete/@restaurant.GetId()">Delete</a></li>
     }
   </ol>
 }
-<p><a href="/restaurants/new">Add a new restaurant</a></p>
-<p><a href="/">Return to Main Page</a></p>
+<h5><a href="/restaurants/new">Add a new restaurant</a></h5>
+<h5><a href="/">Return to Main Page</a></h5>
