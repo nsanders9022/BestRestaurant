@@ -304,8 +304,6 @@ namespace RestaurantApp
             return cuisineName;
         }
 
-
-
         // method to search based on name
         public static List<Restaurant> SearchDelivery(int deliveryValue)
         {
@@ -348,14 +346,6 @@ namespace RestaurantApp
             }
             return deliveryRestaurant;
         }
-
-
-
-
-
-
-
-
 
 // update restaurant name
         public void Update(string newRestaurantName)

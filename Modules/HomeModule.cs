@@ -118,6 +118,16 @@ namespace RestaurantApp
                 SelectedRestaurant.Delete();
                 return View["success.cshtml"];
             };
+
+            Get["/delivery/search"] = _ => {
+                List<Restaurant> AllDeliveryRestaurants = Restaurant.SearchDelivery(Request.Form["restaurant-delivery-search"]);
+                return View["delivery_search_results.cshtml", AllDeliveryRestaurants];
+            };
+
+            Post["/delivery/search"] = _ => {
+                List<Restaurant> AllDeliveryRestaurants = Restaurant.SearchDelivery(Request.Form["restaurant-delivery-search"]);
+                return View["delivery_search_results.cshtml", AllDeliveryRestaurants];
+            };
         }
     }
 }
