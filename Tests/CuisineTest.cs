@@ -124,7 +124,7 @@ namespace RestaurantApp
 
         //test that category was deleted from the database
         [Fact]
-        public void Delete_DeleteFromDatabase_null()
+        public void Delete_DeleteCuisineFromDatabase_null()
         {
             //Arrange
             string type1 = "German";

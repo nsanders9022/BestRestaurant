@@ -24,11 +24,9 @@ This webpage will take user input about Restaurants and then sort that informati
 * Input: SUDOCIPE
 * Output: SUDOCIPE
 
-
 #### User can add Cuisine
 * Input: FUSION
 * Output:  FUSION
-
 
 #### User can sort by cuisine
 * Input: Search by cuisine
@@ -41,6 +39,11 @@ This webpage will take user input about Restaurants and then sort that informati
 #### User can delete cuisine with corresponding Restaurants
 * Input: Delete all mexican food
 * Output: Mexican Food category and Restaurant have been deleted
+
+## Known bugs
+* Test for delete all categories from database isn't passing (functionality seems to work though)
+* Missing a delete all category button on cshtml
+* All delivery values automatically set to 1/true even if we try to set it to 0/false
 
 ## Legal
 MIT License

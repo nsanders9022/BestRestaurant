@@ -69,6 +69,18 @@ namespace RestaurantApp
         {
             return _delivery;
         }
+
+        public int DeliveryBoolToInt()
+        {
+            if (GetDelivery() == true)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         // get cuisine id
         public int GetCuisineId()
         {
@@ -323,17 +335,20 @@ namespace RestaurantApp
                 int restaurantId = rdr.GetInt32(0);
                 string restaurantName = rdr.GetString(1);
                 string restaurantLocation = rdr.GetString(2);
-                bool restaurantDelivery;
+                bool restaurantDeliveryBool;
+                int restaurantDeliveryInt;
                 if (rdr.GetByte(3) == 1)
                 {
-                    restaurantDelivery = true;
+                    restaurantDeliveryBool = true;
+                    restaurantDeliveryInt = 1;
                 }
                 else
                 {
-                    restaurantDelivery = false;
+                    restaurantDeliveryBool = false;
+                    restaurantDeliveryInt = 0;
                 }
                 int restaurantCusineId = rdr.GetInt32(4);
-                Restaurant newRestaurant = new Restaurant(restaurantName, restaurantLocation, restaurantDelivery, restaurantCusineId, restaurantId);
+                Restaurant newRestaurant = new Restaurant(restaurantName, restaurantLocation, restaurantDeliveryBool, restaurantCusineId, restaurantId);
                 deliveryRestaurant.Add(newRestaurant);
             }
             if (rdr != null)
